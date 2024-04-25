@@ -1,7 +1,61 @@
-import React from 'react'
+import { Link } from "react-router-dom";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import logo from "../assets/logofinal.png";
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <header className="bg-slate-700 shadow-md">Header component</header>
-  )
+    <header className="border-gray-200 bg-white dark:bg-white dark:border-gray-700 border-b-2">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        {/* Logo et titre */}
+        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src={logo} className="h-8" alt="Flowbite Logo" />
+            <span className="self-center text-2xl font-semibold whitespace-nowrap">SMARTFLEX-IT</span>
+        </Link>
+
+        {/* Menu Burger */}
+        <button
+          data-collapse-toggle="navbar-solid-bg"
+          type="button"
+          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          aria-controls="navbar-solid-bg"
+          aria-expanded={menuOpen}
+          onClick={toggleMenu}
+        >
+          <span className="sr-only">Open main menu</span>
+          {menuOpen ? (
+            <FontAwesomeIcon icon={faCircleXmark} size="lg" />
+          ) : (
+            <FontAwesomeIcon icon={faBars} size="lg" />
+          )}
+        </button>
+
+        {/* Liens du menu */}
+        <div className={`${menuOpen ? 'block' : 'hidden'} w-full md:block md:w-auto`} id="navbar-solid-bg">
+          <ul className="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+          <li>
+           
+            <Link to="/about" className="block py-2 px-3 md:p-0 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">About</Link>
+        </li>
+        <li>
+           
+            <Link to="/service" className="block py-2 px-3 md:p-0 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Services</Link>
+        </li>
+        <li>
+           
+            <Link to="/contact" className="block py-2 px-3 md:p-0 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Contact</Link>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+  );
 }
