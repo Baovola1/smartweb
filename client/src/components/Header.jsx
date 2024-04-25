@@ -30,16 +30,17 @@ export default function Header() {
         </Link>
 
         {/* Menu Burger */}
-        <button
+        <button 
           type="button"
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:outline-none dark:text-gray-400"
+          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:outline-none dark:text-gray-400
+          bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 "
           aria-expanded={menuOpen}
           onClick={toggleMenu}
         >
           {menuOpen ? (
-            <FontAwesomeIcon icon={faCircleXmark} size="2x" />
+            <FontAwesomeIcon icon={faCircleXmark} size="2x"/>
           ) : (
-            <FontAwesomeIcon icon={faBars} size="2x" />
+            <FontAwesomeIcon icon={faBars} size="2x"/>
           )}
         </button>
 
