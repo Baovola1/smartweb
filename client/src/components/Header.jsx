@@ -12,6 +12,9 @@ export default function Header() {
     setMenuOpen(!menuOpen);
   };
 
+  // Fonction pour fermer le menu en cliquant en dehors du contenu central
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <header className="border-gray-200 bg-white dark:bg-white dark:border-gray-700 border-b-2">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -38,22 +41,24 @@ export default function Header() {
           )}
         </button>
 
-        {/* Liens du menu */}
-        <div className={`${menuOpen ? 'block' : 'hidden'} w-full md:block md:w-auto`} id="navbar-solid-bg">
-          <ul className="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
-          <li>
-           
-            <Link to="/about" className="block py-2 px-3 md:p-0 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">About</Link>
-        </li>
-        <li>
-           
-            <Link to="/service" className="block py-2 px-3 md:p-0 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Services</Link>
-        </li>
-        <li>
-           
-            <Link to="/contact" className="block py-2 px-3 md:p-0 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Contact</Link>
-        </li>
-          </ul>
+        {/* Modal pour les liens du menu (pour mobile) et navigation classique pour desktop */}
+        <div className={`${menuOpen ? 'fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center z-50' : 'hidden md:flex md:items-center md:justify-between'}`} onClick={menuOpen ? closeMenu : undefined}>
+          <div className={`${menuOpen ? 'block' : 'hidden md:block'}`} onClick={(e) => e.stopPropagation()}>
+            <ul className="flex flex-col md:flex-row font-medium bg-white rounded-lg p-5 space-y-4 md:space-y-0 md:p-0 md:bg-transparent shadow-lg md:shadow-none">
+              <li>
+                <Link to="/service" className="py-2 px-3 md:px-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent">Services</Link>
+              </li>
+              <li>
+                <Link to="/approche" className="py-2 px-3 md:px-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent">Notre Approche</Link>
+              </li>
+              <li>
+                <Link to="/about" className="py-2 px-3 md:px-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent">About</Link>
+              </li>
+              <li>
+                <Link to="/contact" className="py-2 px-3 md:px-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent">Contact</Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
